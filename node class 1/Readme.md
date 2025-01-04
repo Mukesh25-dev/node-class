@@ -118,3 +118,85 @@ in package.json add, additional
 
 
 ### Filesystem in node module
+
+
+
+### express js
+- is a minimal and flexible node js web application framework that provides a robust set of features for web application
+- it ius a open source framework that is used to bui;d web application in node
+- it is used over node because, it provides a lot of features required for web development lik routing, middleware etc.. and also very easy to manage
+
+### command - npm i express
+
+### how to create server using express js
+- // import express
+
+const express = require('express')
+
+//match the express to an app object
+
+const app = express();
+
+
+// now give the methods and their needed messages
+
+app.get('/', (request, response) =>{
+  response.json({message:"Get/"})
+})
+
+app.post('/posts', (request, response) =>{
+  response.json({message:"post/"})
+})
+
+
+//listen the server to request
+
+app.listen(3000, () =>{
+  console.log("server is running on http://127.0.0.1:3000")
+})
+
+
+
+### Middlewares:
+- a function inbetween  an incoming request and an outgoing response
+- Example:
+-- const express = require("express");
+
+//match the express to an app object
+
+const app = express();
+
+const logger = (request, response, next) => {
+  console.log(`Request Method :${request.method}`);
+  console.log(`Request Headers :${JSON.stringify(request.headers)}`);
+  console.log(`Request Query :${JSON.stringify(request.query)}`);
+  console.log(`Request Params :${JSON.stringify(request.params)}`);
+  console.log(`Request Body :${JSON.stringify(request.body)}`);
+  console.log(`Request Cookies :${JSON.stringify(request.cookies)}`);
+
+  next();
+};
+
+app.use(logger);
+
+// now give the methods and their needed messages
+
+app.get("/", (request, response) => {
+  response.json({ message: "Get/" });
+});
+
+app.post("/posts", (request, response) => {
+  response.json({ message: "post/" });
+});
+
+const notFound = (request, response, next) => {
+  response.json({ message: "Route Not Found" });
+};
+
+app.use(notFound);
+
+//listen the server to request
+
+app.listen(3000, () => {
+  console.log("server is running on http://127.0.0.1:3000");
+});
